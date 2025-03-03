@@ -11,8 +11,8 @@
     # Split the numbers based on the delimiter
     numbers = numbers_string.split(delimiter).map(&:to_i)
 
+    # Check for negative numbers and raise an exception if any are found
     negatives = numbers.select { |n| n < 0 }
-
     if negatives.any?
         raise "Negative numbers are not allowed: #{negatives.join(', ')}"
     end
