@@ -1,27 +1,40 @@
 import unittest
 
-def processing_string_to_add(input):
-    # Debug: print input
-    print(f"input: {input}")
-
-    # Step 1: Extract delimiter from the first line
+def processing_string_to_add(input): 
     delimiter_line = input.split("\n")[0]
-    delimiter = delimiter_line[2:]  # Skip "//" at the beginning
+    delimiter = delimiter_line[2:] 
     print(f"delimiter: {delimiter}")
 
-    # Step 2: Extract numbers from the remaining string, starting from the second line
-    numbers_string = "".join(input.split("\n")[1:])  # Join all lines after the first one
+    numbers_string = "".join(input.split("\n")[1:])  
     print(f"numbers_string: {numbers_string}")
 
-    # Step 3: Split the numbers based on the delimiter
     numbers = list(map(int, numbers_string.split(delimiter)))
-    print(f"numbers: {numbers}")
 
-    # Step 4: Check for negative numbers and raise an exception if any are found
     negatives = [n for n in numbers if n < 0]
     if negatives:
         raise ValueError(f"Negative numbers are not allowed: {', '.join(map(str, negatives))}")
 
-    # Step 5: Return the sum of the numbers
+
     return sum(numbers)
 
+# Test case class
+class TestProcessingStringToAdd(unittest.TestCase):
+    def test_valid_input_with_custom_delimiter(self):
+        input_data = "//;\n1;2;3;5\n"
+        result = processing_string_to_add(input_data)
+        self.assertEqual(result, 11, "The sum of the numbers should be 11")
+
+    def test_input_with_negative_number(self):
+        input_data = "//;\n1;2;3;-4;5\n"
+        with self.assertRaises(ValueError) as context:
+            processing_string_to_add(input_data)
+        self.assertEqual(str(context.exception), "Negative numbers are not allowed: -4")
+
+    def test_custom_delimiter_with_multiple_numbers(self):
+        input_data = "//|\n10|20|30|40|50\n"
+        result = processing_string_to_add(input_data)
+        self.assertEqual(result, 150, "The sum of the numbers should be 150")
+
+# Run the tests
+if __name__ == '__main__':
+    unittest.main()
