@@ -5,6 +5,7 @@
     delimiter_string = input_sting.split("\n").first
     delimiter = delimiter_string[2..-1]
 
+    # Extract numbers from the remaining string, starting from the second line
     numbers_string = input_sting.split("\n")[1..].join
 
     numbers = numbers_string.split(delimiter).map(&:to_i)
