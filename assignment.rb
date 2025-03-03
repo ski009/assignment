@@ -1,6 +1,7 @@
  require 'test/unit'
 
  def processing_string_to_add(input_sting)
+    # Step 1: Extract delimiter from the first line
     delimiter_string = input_sting.split("\n").first
     delimiter = delimiter_string[2..-1]
 
