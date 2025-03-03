@@ -8,6 +8,7 @@
     # Extract numbers from the remaining string, starting from the second line
     numbers_string = input_sting.split("\n")[1..].join
 
+    # Split the numbers based on the delimiter
     numbers = numbers_string.split(delimiter).map(&:to_i)
 
     negatives = numbers.select { |n| n < 0 }
