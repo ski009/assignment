@@ -17,6 +17,7 @@
         raise "Negative numbers are not allowed: #{negatives.join(', ')}"
     end
 
+    # Return the sum of the numbers
     numbers.sum
 end
 
